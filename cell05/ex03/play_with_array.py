@@ -1,5 +1,15 @@
-arr = [2, 8, 9, 48, 8, 22, -12, 2]
-print(arr)
+#play_with_arrays.py
 
-transformed = {x + 2 for x in arr if x + 2 > 9}
-print(transformed)
+def main():
+
+    original_array = [2, 8, 9, 48, 8, 22, -12, 2]
+
+
+    new_array = [x + 2 for x in original_array if x > 5]
+
+
+    print(original_array)
+    print(new_array)
+
+if __name__=="__main__":
+    main
