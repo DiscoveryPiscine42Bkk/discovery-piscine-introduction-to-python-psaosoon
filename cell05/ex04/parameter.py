@@ -1,9 +1,8 @@
-def main():
-    user_input = input("Please enter some parameters (separate by space): ")
+ #l/usr/bin/env python3
 
-    params = user_input.split()
-    num_params = len(params)
-    print(f"Number of parameters: {num_params}.")
+import sys
 
-if __name__ == "__main__":
-    main()
+
+num_params = len(sys.argv) -1
+
+print (f"Number of parameters: {num_params}.")
