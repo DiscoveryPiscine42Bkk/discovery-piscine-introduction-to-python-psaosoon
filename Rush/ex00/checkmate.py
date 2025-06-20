@@ -28,38 +28,70 @@ def is_in_check(board):
     for dx, dy in rook_directions:
         x, y = kx + dx, ky + dy
         while 0 <= x < n and 0 <= y < n:
-            if board[x][y] != '.':  # If we hit a piece
-                if board[x][y] == 'R' or board[x][y] == 'Q':
-                    return "Success"
+            if board[x][y] != '.':  # If we hidef checkmate(board: str):
+    board = board.strip().split('\n')
+    size = len(board)
+
+    for row in board:
+        if len(row) != size:
+            print("Error")
+            return
+
+    king_pos = None
+    for i in range(size):
+        for j in range(len(board[i])):
+            if board[i][j] == 'K':
+                king_pos = (i, j)
                 break
-            x, y = x + dx, y + dy
+        if king_pos:
+            break
 
-    # Check for attacks from Bishops and Queens (diagonal)
-    for dx, dy in bishop_directions:
-        x, y = kx + dx, ky + dy
-        while 0 <= x < n and 0 <= y < n:
-            if board[x][y] != '.':  # If we hit a piece
-                if board[x][y] == 'B' or board[x][y] == 'Q':
-                    return "Success"
-                break
-            x, y = x + dx, y + dy
+    if not king_pos:
+        print("Error")
+        return
 
-    # Check for attacks from Pawns (diagonal attacks)
-    for dx, dy in pawn_directions:
-        x, y = kx + dx, ky + dy
-        if 0 <= x < n and 0 <= y < n:
-            if board[x][y] == 'P':
-                return "Success"
+    def in_bounds(x, y):
+        return 0 <= x < size and 0 <= y < len(board[x])
 
-    return "Fail"
-board1 = [
-    ['.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', 'R', '.', '.', '.', '.'],
-    ['.', '.', '.', 'K', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.']
-]
-print(is_in_check(board1))
+    def is_pawn_attacking():
+        x, y = king_pos
+        for dx, dy in [(-1, -1), (-1, 1)]:
+            nx, ny = x + dx, y + dy
+            if in_bounds(nx, ny) and board[nx][ny] == 'P':
+                return True
+        return False
+
+    def is_bishop_attacking():
+        x, y = king_pos
+        for dx, dy in [(-1, -1), (-1, 1), (1, -1), (1, 1)]:
+            nx, ny = x + dx, y + dy
+            while in_bounds(nx, ny):
+                piece = board[nx][ny]
+                if piece == '.':
+                    nx += dx
+                    ny += dy
+                elif piece == 'B' or piece == 'Q':
+                    return True
+                else:
+                    break
+        return False
+
+    def is_rook_attacking():
+        x, y = king_pos
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nx, ny = x + dx, y + dy
+            while in_bounds(nx, ny):
+                piece = board[nx][ny]
+                if piece == '.':
+                    nx += dx
+                    ny += dy
+                elif piece == 'R' or piece == 'Q':
+                    return True
+                else:
+                    break
+        return False
+
+    if is_pawn_attacking() or is_bishop_attacking() or is_rook_attacking():
+        print("Success")
+    else:
+        print("Fail")
