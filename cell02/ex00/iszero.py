@@ -1,6 +1,6 @@
-number = input(' ')
-number = int(number)
+number = float(input("Please enter a number: "))
+
 if number == 0:
-    print("This number is equal to zero.")
+  print("This number is equal to zero.")
 else:
-    print("This number is different from zero.")
+  print("This number is different from zero.")
