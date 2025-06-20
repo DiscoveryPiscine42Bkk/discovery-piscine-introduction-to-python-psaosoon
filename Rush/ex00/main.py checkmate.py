@@ -55,7 +55,7 @@ def checkmate(board_str): #แบ่งข้อความเป้นบั�
 def main():
     board1 = """\
 ....
-.PP.
+..R.
 .K..
 ...."""
     checkmate(board1)
