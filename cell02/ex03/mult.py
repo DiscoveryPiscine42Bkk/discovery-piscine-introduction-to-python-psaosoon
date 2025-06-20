@@ -1,10 +1,13 @@
-num1 = int(input("Enter the first number:"))
-num2 = int(input("Enter the second number"))
-result = num1 * num2
-print(f"{num1}) X {num2} - {num1 * num2}")
-if num1 * num2 > 0:
-    print("The result is positive.")
-elif num1 * num2 < 0:
-    print("The result is negative.")
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
+
+result = num * num2
+
+if result > 0:
+   print("The result is positive.")
+elif result < 0:
+   print("The result is negative.")
 else:
-    print(The result is positive and negative)
+   print("The result is zero.")
+  
+print(f"The result of multiplying {num1} and {num2} is: {result}"}
