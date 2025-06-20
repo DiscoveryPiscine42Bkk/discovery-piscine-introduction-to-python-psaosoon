@@ -1,13 +1,18 @@
 import sys
 
-arg = sys.argv[1:]
-if len(args)!=2:
-    print("none")
-else:
-    try:
-        start = int(args[0])
-        end = int(args[1])
-        numbers = list(range(start,end + 1))
-        print(numbers)
-    except ValueError:
+def main():
+    if len(sys.argv) != 3:
         print("none")
+        return
+    
+    try:
+        start = int(sys.argv[1])
+        end = int(sys.argv[2])
+        # +1 เพื่อรวม end ด้วย
+        print(list(range(start, end + 1)))
+    except ValueError:
+        # กรณีมีคนใส่ค่าที่ไม่ใช่ตัวเลข เช่น 'a'
+        print("none")
+
+if __name__ == "__main__":
+    main()
