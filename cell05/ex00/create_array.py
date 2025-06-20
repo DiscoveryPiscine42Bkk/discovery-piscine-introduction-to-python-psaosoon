@@ -1,2 +1,2 @@
-numbers = [2, 8, 9, 48, 8, 22, -12, 2]
-print(numbers)
+number = [10,20,30,40,50]
+print("Array",number)
